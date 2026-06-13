@@ -1,4 +1,4 @@
-# SCARA Robot Arm Controller
+<img width="1122" height="1402" alt="ChatGPT Image Jun 13, 2026, 09_01_35 PM" src="https://github.com/user-attachments/assets/6d13665c-fd13-4664-ac48-65e8bd2c5aa5" /># SCARA Robot Arm Controller
 <img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY" src="https://github.com/user-attachments/assets/6d757b25-525f-4041-a2ba-22e4e828ae29" />
 
 
@@ -44,7 +44,8 @@ A modular SCARA robot arm control system built on ESP32 featuring Forward Kinema
 
 # Software Architecture
 
-![Architecture](docs/images/software-architecture.png)
+<img width="1122" height="1402" alt="ARc" src="https://github.com/user-attachments/assets/da55f20c-abe2-46da-9c35-706a7649c201" />
+
 
 ```text
 Web Interface
@@ -69,7 +70,9 @@ Stepper Drivers + Sensors
 
 # Web Interface
 
-![Web Interface](docs/images/web-interface.png)
+<img width="1554" height="1580" alt="192 168 137 30_" src="https://github.com/user-attachments/assets/0a381091-2a29-4056-8bba-7c5e4e1af6be" />
+<img width="1554" height="1580" alt="192 168 137 30_ (1)" src="https://github.com/user-attachments/assets/38e8ac0a-8b31-4991-8c3c-decfc5fd5bed" />
+
 
 The web interface allows:
 
@@ -185,7 +188,3 @@ If you print or redesign the robot:
 - Collision avoidance
 
 ---
-
-# License
-
-MIT License
