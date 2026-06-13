@@ -1,4 +1,4 @@
-# Calibration Guide — SCARA v10.22
+# Calibration Guide 
 
 Calibration teaches the firmware where the arm physically is in space. All physical limits are stored as raw stepper step counts from the home switch — not as degree values. Degree limits are derived from the stored zeros and raw endpoints each time calibration is loaded. This means recalibrating a zero does not corrupt your saved endpoints, and endpoints saved under one geometry remain physically correct if you move the zero.
 
