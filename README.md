@@ -1,184 +1,147 @@
-# SCARA Robot Arm Sowftware 
+# SCARA Robot Arm — v10.22
 
-<img width="4469" height="3839" alt="B2 Z-AXIS ARM BASE dsa" src="https://github.com/user-attachments/assets/c458b0e9-8e46-4d0a-9d5a-0e3ad11cfd64" />
+<img width="4469" height="3839" alt="SCARA Robot Arm Hardware" src="https://github.com/user-attachments/assets/c458b0e9-8e46-4d0a-9d5a-0e3ad11cfd64" />
 
-
-A modular SCARA robot arm control system built on ESP32 featuring Forward Kinematics, Inverse Kinematics, Motion Control, Recipe Execution, Persistent Storage, and a Web-Based User Interface.
-
----
-
-# Features
-
-## Motion Control
-
-- Coordinated multi-axis movement
-- Acceleration control
-- Homing system
-- Stepper driver integration
-
-## Kinematics
-
-- Forward Kinematics (FK)
-- Inverse Kinematics (IK)
-- Cartesian positioning
-- Joint-space calculations
-
-## Recipe System
-
-- Save robot operations
-- Execute predefined sequences
-- Repeatable automation tasks
-
-## Data Storage
-
-- LittleFS integration
-- Persistent settings
-- Recipe storage
-
-## Communication
-
-- WebSocket communication
-- Command processing
-- Real-time robot status updates
+A full-stack SCARA robot arm control system running on an ESP32. The firmware handles forward and inverse kinematics, coordinated multi-axis motion, recipe-based automation, and persistent storage — all controllable through a browser-based interface over WebSocket.
 
 ---
 
-# Software Architecture
+## Overview
 
-```text
-Web Interface
-      │
-      ▼
+This project started as a custom-built SCARA arm and grew into a modular control system designed to be adapted for different arm geometries and configurations. The goal was a self-contained embedded system — no PC required during operation, no external dependencies. Just an ESP32, a browser, and your robot.
+
+---
+
+## Features
+
+**Motion Control**
+- Coordinated multi-axis movement with acceleration profiles
+- Stepper motor integration via standard driver interfaces
+- Full homing system with limit switch support
+
+**Kinematics**
+- Forward Kinematics (FK) — joint angles → end effector position
+- Inverse Kinematics (IK) — Cartesian target → joint angles
+- Joint-space and Cartesian-space positioning modes
+
+**Recipe System**
+- Create and save sequences of robot operations
+- Execute repeatable automation routines
+- Stored persistently on-device via LittleFS
+
+**Web Interface**
+- Real-time control from any browser on the local network
+- Manual jogging, Cartesian positioning, and joint positioning
+- Recipe creation, editing, and execution
+- Live system status monitoring
+
+<img width="1554" height="1580" alt="Web Interface" src="https://github.com/user-attachments/assets/4119ec38-079b-4bd7-a965-3a554a48a245" />
+
+---
+
+## Hardware
+
+| Component | Details |
+|-----------|---------|
+| Controller | ESP32 |
+| Actuators | Stepper motors + stepper drivers |
+| Sensors | Limit switches, homing sensors |
+
+---
+
+## Software Architecture
+
+```
+Browser (WebSocket)
+       │
+       ▼
 ESP32 Main Controller
-
- ├── Motion Control
- ├── Kinematics
- ├── Recipe Manager
- ├── State Manager
- ├── Data Storage (LittleFS)
- └── Communication Layer
-
-      │
-      ▼
-
+ ├── Motion Control       — Stepper coordination, acceleration, homing
+ ├── Kinematics           — FK / IK solver, coordinate transforms
+ ├── Recipe Manager       — Sequence storage and execution
+ ├── State Manager        — Robot state tracking
+ ├── Storage (LittleFS)   — Persistent settings and recipes
+ └── Communication Layer  — WebSocket server, command processing
+       │
+       ▼
 Stepper Drivers + Sensors
 ```
 
 ---
 
-# Web Interface
-<img width="1554" height="1580" alt="192 168 137 30_" src="https://github.com/user-attachments/assets/4119ec38-079b-4bd7-a965-3a554a48a245" />
+## Project Structure
 
-The web interface allows:
-
-- Manual control
-- Cartesian positioning
-- Joint positioning
-- Recipe creation
-- Recipe execution
-- System monitoring
-
----
-
-# Hardware
-
-## Controller
-
-- ESP32
-
-## Actuators
-
-- Stepper Motors
-- Stepper Drivers
-
-## Sensors
-
-- Limit Switches
-- Homing Sensors
+```
+V10_22/
+├── MotionControl/
+├── Kinematics/
+├── RecipeManager/
+├── StateManager/
+├── Communication/
+├── Storage/
+├── WebInterface/
+├── Config/
+└── Main/
+```
 
 ---
 
-# Getting Started
+## Getting Started
 
-Read the following documentation in order:
+Read the documentation in this order:
 
-1. BUILD_GUIDE.md
-2. CALIBRATION_GUIDE.md
-3. SOFTWARE_ARCHITECTURE.md
-4. KINEMATICS.md
+1. [`BUILD_GUIDE.md`](docs/BUILD_GUIDE.md) — Mechanical assembly and wiring
+2. [`CALIBRATION_GUIDE.md`](docs/CALIBRATION_GUIDE.md) — Configuring the arm for your geometry
+3. [`SOFTWARE_ARCHITECTURE.md`](docs/SOFTWARE_ARCHITECTURE.md) — How the firmware is structured
+4. [`KINEMATICS.md`](docs/KINEMATICS.md) — FK and IK implementation details
 
 ---
 
-# Configuration
+## Configuration
 
-Before using the software on your own robot, update:
+Before running the firmware on your own robot, update the following in `Config/`:
 
-- Link lengths
-- Motor directions
-- Steps per revolution
-- Joint limits
+- Link lengths (arm segment dimensions)
+- Motor directions and steps per revolution
+- Joint limits (min/max angles)
 - Homing parameters
 - WiFi credentials
 
-Detailed instructions are available in:
-
-```text
-docs/CALIBRATION_GUIDE.md
-```
+Full configuration instructions are in [`docs/CALIBRATION_GUIDE.md`](docs/CALIBRATION_GUIDE.md).
 
 ---
 
-# Project Structure
+## Building Your Own
 
-```text
-V10_22/
+If you're printing or redesigning the arm:
 
-├── MotionControl
-├── Kinematics
-├── RecipeManager
-├── StateManager
-├── Communication
-├── Storage
-├── WebInterface
-├── Config
-└── Main
-```
+1. Assemble the mechanical structure
+2. Mount and wire the stepper motors
+3. Install limit switches and homing sensors
+4. Update link lengths and motor config
+5. Run the calibration procedure
+6. Verify FK output matches physical position
+7. Verify IK solutions are reachable
+8. Run a full motion test
 
 ---
 
-# Building Your Own Robot
-
-If you print or redesign the robot:
-
-1. Assemble mechanics
-2. Install motors
-3. Install sensors
-4. Configure dimensions
-5. Calibrate robot
-6. Verify FK
-7. Verify IK
-8. Test motion system
-
----
-
-# Documentation
+## Documentation
 
 | File | Description |
-|--------|--------|
-| BUILD_GUIDE.md | Hardware setup |
-| CALIBRATION_GUIDE.md | Robot calibration |
-| SOFTWARE_ARCHITECTURE.md | Code architecture |
-| KINEMATICS.md | FK and IK explanation |
-| TROUBLESHOOTING.md | Common issues |
+|------|-------------|
+| `BUILD_GUIDE.md` | Hardware assembly and wiring |
+| `CALIBRATION_GUIDE.md` | Geometry configuration and calibration |
+| `SOFTWARE_ARCHITECTURE.md` | Firmware structure and module overview |
+| `KINEMATICS.md` | FK and IK math and implementation |
+| `TROUBLESHOOTING.md` | Common issues and fixes |
 
 ---
 
-# Future Improvements
+## Roadmap
 
-- ROS2 integration
-- Vision system support
-- Advanced trajectory planning
-- Closed-loop control
-- Collision avoidance
-
----
+- [ ] Closed-loop motor control
+- [ ] Advanced trajectory planning
+- [ ] Collision avoidance
+- [ ] Vision system integration
+- [ ] ROS2 bridge
