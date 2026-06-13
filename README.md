@@ -1,6 +1,7 @@
 # SCARA Robot Arm Controller
 
-![SCARA Robot] <img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY" src="https://github.com/user-attachments/assets/ec7918d1-2145-458d-9c28-85c1f02edb24" />
+![SCARA Robot]
+<img width="6600" height="5100" alt="B2 Z-AXIS ARM BASE ASSEMBLY" src="https://github.com/user-attachments/assets/ec7918d1-2145-458d-9c28-85c1f02edb24" />
 
 
 A modular SCARA robot arm control system built on ESP32 featuring Forward Kinematics, Inverse Kinematics, Motion Control, Recipe Execution, Persistent Storage, and a Web-Based User Interface.
